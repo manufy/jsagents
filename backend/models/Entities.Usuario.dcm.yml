@@ -1,0 +1,11 @@
+# ORM.Mapping.Entities.User.dcm.yml
+Entities\Usuario:
+  type: entity
+  table: Usuarios
+  fields:
+    id:
+       id:
+            type: integer
+            generator: { strategy: AUTO }
+    nombre:
+      length: 50

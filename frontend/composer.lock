@@ -1,0 +1,12 @@
+{
+    "hash": "9c84ecd6cc4bb284209a298a5cd32bb7",
+    "packages": [
+        {
+            "package": "monolog/monolog",
+            "version": "dev-master",
+            "source-reference": "1.1.0"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": []
+}

@@ -1,0 +1,1 @@
+coffee -o assets/js/coffeejs/ -cw src/coffee/

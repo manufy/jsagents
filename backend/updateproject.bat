@@ -1,0 +1,1 @@
+php doctrinecli.php orm:schema-tool:update --force

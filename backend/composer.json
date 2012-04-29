@@ -1,0 +1,22 @@
+{
+	"name": "yacms/doctrine-skeleton",
+	"version": "1.0.0",
+	"authors": [
+        		{
+            		"name": "Manuel Fernández Yáñez",
+           			"email": "manu@redgreenrefactor.blogsite.org",
+          			"homepage": "http://redgreenrefactor.blogsite.org"
+        		}
+    ],
+    "require": {
+        "doctrine/common": "2.2.*",
+        "doctrine/dbal": "2.2.*",
+        "doctrine/orm": "2.2.*",
+        "doctrine/mongodb": "*",
+
+
+        "raul782/phpspec": "*",
+        "mockery/mockery": "*"
+       
+    }
+}
