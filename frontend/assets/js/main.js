@@ -20,8 +20,12 @@ require(["vendor/jquery-1.7.2",
 	    //util's dependencies have loaded, and the util argument will hold
 	    //the module value for "helper/util".
 	    
-	
+		app();
 	
 	
 	});
+
+function app() {
+	InitCoffeeScriptAgentView();
+}
 

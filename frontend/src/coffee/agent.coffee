@@ -139,6 +139,7 @@ class AgentsView extends Backbone.View
    modifyAgents: ->    
      for agent in @collection.models
        agent.set content: "MODIFIED"
+     @render()
        
    loadAgents: ->
      @collection.fetch()
@@ -168,5 +169,9 @@ class AgentsView extends Backbone.View
           'click #buttonviewagents':   'dumpAgents'
           
 # INIT VIEW ON LOAD        
-  
-agentsviews = new AgentsView
+ 
+root = exports ? this
+root.InitCoffeeScriptAgentView = ->
+   console.log('View Start')
+   agentsview = new AgentsView 
+
