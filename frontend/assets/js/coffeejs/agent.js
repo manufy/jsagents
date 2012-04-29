@@ -98,6 +98,8 @@
     ItemViewAgent.name = 'ItemViewAgent';
 
     function ItemViewAgent() {
+      this.add = __bind(this.add, this);
+
       this.unrender = __bind(this.unrender, this);
       return ItemViewAgent.__super__.constructor.apply(this, arguments);
     }
@@ -112,7 +114,7 @@
     };
 
     ItemViewAgent.prototype.render = function() {
-      $(this.el).html("<span>id1:" + this.model.id + " id2:" + (this.model.get('_id')) + " ok:" + (this.model.get('ok')) + " name:" + (this.model.get('name')) + " content:" + (this.model.get('content')) + "!</span>\n<span class=\"swapagent\"> SWAP </span>\n<span class=\"deleteagent\"> DEL </span>");
+      $(this.el).html("<span>id:" + this.model.id + " id_:" + (this.model.get('_id')) + " ok:" + (this.model.get('ok')) + " name:" + (this.model.get('name')) + " content:" + (this.model.get('content')) + "!</span>\n<span class=\"swapagent\"> SWAP </span>\n<span class=\"deleteagent\"> DEL </span>");
       console.log("render model");
       return this;
     };
@@ -120,6 +122,10 @@
     ItemViewAgent.prototype.unrender = function() {
       $(this.el).remove();
       return console.log("unrender model");
+    };
+
+    ItemViewAgent.prototype.add = function() {
+      return console.log('add');
     };
 
     ItemViewAgent.prototype.swap = function() {
@@ -164,6 +170,7 @@
       this.collection = new MongoDBAgents;
       console.log('Bootsrapping @collection.reset at ttp://db.local/jsagentsdb/agents');
       this.collection.bind('add', this.appendItem);
+      this.collection.bind("reset", this.render);
       this.counter = 0;
       return this.render();
     };

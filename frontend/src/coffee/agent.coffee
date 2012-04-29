@@ -57,7 +57,7 @@ class ItemViewAgent extends Backbone.View
     
   render: ->
     $(@el).html  """
-        <span>id1:#{@model.id} id2:#{@model.get '_id'} ok:#{@model.get 'ok'} name:#{@model.get 'name'} content:#{@model.get 'content'}!</span>
+        <span>id:#{@model.id} id_:#{@model.get '_id'} ok:#{@model.get 'ok'} name:#{@model.get 'name'} content:#{@model.get 'content'}!</span>
         <span class="swapagent"> SWAP </span>
         <span class="deleteagent"> DEL </span>
       """  
@@ -69,6 +69,9 @@ class ItemViewAgent extends Backbone.View
       console.log("unrender model")
       
    # UI ACTIONS
+   
+   add: =>
+     console.log('add')
      
    swap: ->
       @model.set
@@ -106,6 +109,7 @@ class AgentsView extends Backbone.View
     @collection = new MongoDBAgents
     console.log ('Bootsrapping @collection.reset at ttp://db.local/jsagentsdb/agents')
     @collection.bind 'add', @appendItem
+    @collection.bind("reset", @render)
     @counter = 0
     @render()    
     

@@ -5,7 +5,7 @@ require(["order!vendor/jquery-1.7.2",
          "order!vendor/less-1.3.0.min",
          "order!vendor/haml",
          "order!vendor/backbone",
-         "order!vendor/zepto.min",
+        // ZEPTO ERROR EN IE9 "order!vendor/zepto.min",
          "order!coffeejs/agent",
          "order!coffeejs/app"
          ], function($) {
