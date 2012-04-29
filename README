@@ -3,3 +3,5 @@ JavaScript (CoffeeScript) Agents experiment
 1) To have a MongoBD Backend and a JavaScript Frontent.
 2) JS must send object to DB and Viceversa
 3) JS must manipulate in-memory models through backbone.js so a change in model reflects a change in UI
+
+Demo at: tao.homeunix.net/jsagent.blogsite.org/frontend/jsagentswebdb.html
