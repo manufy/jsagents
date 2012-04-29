@@ -1,8 +1,10 @@
 #
-# Agents Interface, By Manuel Fernández Yáñez 2012
+# Agents Interfacing with MongoDB, By Manuel Fernández Yáñez 2012
 #
 
 jQuery ->
+  
+############################ In Memory and DB Agent representation Models #####################################
   
 class Agent extends Backbone.Model
   
@@ -28,6 +30,7 @@ class MongoBDAgent extends Backbone.Model
   content: ->
     @get ('content')
 
+######################### COLLECTIONS #########################
     
 class AgentsList extends Backbone.Collection
     
@@ -38,7 +41,7 @@ class MongoDBAgents extends Backbone.Collection
     url: 'http://db.local/jsagentsdb/agents'
     model: MongoBDAgent
     
-   
+##################################### MODEL VIEWS ############################################
 
 class ItemViewAgent extends Backbone.View
   
@@ -49,6 +52,8 @@ class ItemViewAgent extends Backbone.View
     @model.bind 'change',  @render   
     @model.bind 'remove',  @unrender
     console.log("itemviewagent initialize")
+    
+  ################ RENDER METHODS
     
   render: ->
     $(@el).html  """
@@ -62,6 +67,8 @@ class ItemViewAgent extends Backbone.View
    unrender: =>
       $(@el).remove()
       console.log("unrender model")
+      
+   ################ UI ACTIONS
      
    swap: ->
       @model.set
@@ -70,9 +77,13 @@ class ItemViewAgent extends Backbone.View
         
    remove: -> @model.destroy()
    
+   ################ EVENTS
+   
    events:
       'click .swapagent': 'swap'
       'click .deleteagent': 'remove' 
+ 
+######################################### MAIN VIEW ################################################### 
   
 class AgentsView extends Backbone.View
     
@@ -97,12 +108,20 @@ class AgentsView extends Backbone.View
     @collection.bind 'add', @appendItem
     @counter = 0
     @render()    
+    
+  ################ RENDER METHODS   
        
   render: =>
     $(@el).html  @template
     for agent in @collection.models
        @appendItem(agent)
-   
+      
+  appendItem: (item) ->
+     itemview = new ItemViewAgent model: item
+     $(@el).append itemview.render().el 
+      
+  ################ UI ACTIONS  
+    
   addItem: ->
       @counter++
       @size = @collection.size()
@@ -111,54 +130,45 @@ class AgentsView extends Backbone.View
       item.set ok:1
       item.set content: "Hello, Agent #{@counter} #{@size}!"
       @collection.add item
-      
-  appendItem: (item) ->
-     itemview = new ItemViewAgent model: item
-     $(@el).append itemview.render().el 
-    
-  removeAgents: =>
+         
+   removeAgents: ->
      @collection.reset()
      @counter = @counter + 10
      @render()
   
-   modifyAgents: =>    
+   modifyAgents: ->    
      for agent in @collection.models
        agent.set content: "MODIFIED"
        #alert(agent.get 'content')
        
-   loadAgents: =>
+   loadAgents: ->
      @collection.fetch()
      console.log "Agents fetched " + @collection.size();
      @render()
      #@dumpAgents()
  
-   saveAgents: =>
+   saveAgents: ->
      for agent in @collection.models
        agent.save()
        
-   dumpAgents: =>
+   ################ LOG
+       
+   dumpAgents: ->
     console.log('---------------------- Agents ----------------------')
     console.log "Agents: " + @collection.size();
     for agent in @collection.models
        console.log "#{agent.get '_id'} #{agent.get 'name'} #{agent.get 'content'}"
+       
+   ################## MAIN VIEW EVENTS  
     
-  events:
+   events:
           'click #buttonaddagent':     'addItem'
           'click #buttonremoveagents': 'removeAgents'
           'click #buttonmodifyagents': 'modifyAgents'
           'click #buttonsaveagents':   'saveAgents'
           'click #buttonloadagents':   'loadAgents'
           'click #buttonviewagents':   'dumpAgents'
-          
-class AgentsController extends Backbone.Router
-  
-    router:
-      
-       "" : "index" 
-       
-   index: ->
-     agents = new MongoDBAgents
-     agents.fetch()
-     board = new AgentsView(model: lanes)
+     
+########################################### INIT ###########################################     
      
 agentsviews = new AgentsView
