@@ -168,7 +168,7 @@ class AgentsView extends Backbone.View
           'click #buttonsaveagents':   'saveAgents'
           'click #buttonloadagents':   'loadAgents'
           'click #buttonviewagents':   'dumpAgents'
-     
-########################################### INIT ###########################################     
-     
+          
+########################################### INIT VIEW ON LOAD ###########################################        
+  
 agentsviews = new AgentsView

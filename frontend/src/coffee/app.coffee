@@ -1,5 +1,4 @@
 # Applicaton point of Entry via CoffeScrip
-# Ya Framework by manu@redgreenrefactor.blogsite.org
-
+# Ya Framework by Manuel Fernández Yáñez manu@redgreenrefactor.blogsite.org
 
 
