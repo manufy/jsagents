@@ -4,7 +4,7 @@
 
 jQuery ->
   
-############################ In Memory and DB Agent representation Models #####################################
+# In Memory and DB Agent representation Models
   
 class Agent extends Backbone.Model
   
@@ -30,7 +30,7 @@ class MongoBDAgent extends Backbone.Model
   content: ->
     @get ('content')
 
-######################### COLLECTIONS #########################
+# COLLECTIONS
     
 class AgentsList extends Backbone.Collection
     
@@ -41,7 +41,7 @@ class MongoDBAgents extends Backbone.Collection
     url: 'http://db.local/jsagentsdb/agents'
     model: MongoBDAgent
     
-##################################### MODEL VIEWS ############################################
+# MODEL VIEWS
 
 class ItemViewAgent extends Backbone.View
   
@@ -53,7 +53,7 @@ class ItemViewAgent extends Backbone.View
     @model.bind 'remove',  @unrender
     console.log("itemviewagent initialize")
     
-  ################ RENDER METHODS
+  # RENDER METHODS
     
   render: ->
     $(@el).html  """
@@ -68,7 +68,7 @@ class ItemViewAgent extends Backbone.View
       $(@el).remove()
       console.log("unrender model")
       
-   ################ UI ACTIONS
+   # UI ACTIONS
      
    swap: ->
       @model.set
@@ -77,13 +77,13 @@ class ItemViewAgent extends Backbone.View
         
    remove: -> @model.destroy()
    
-   ################ EVENTS
+   # EVENTS
    
    events:
       'click .swapagent': 'swap'
       'click .deleteagent': 'remove' 
  
-######################################### MAIN VIEW ################################################### 
+# MAIN VIEW 
   
 class AgentsView extends Backbone.View
     
@@ -109,7 +109,7 @@ class AgentsView extends Backbone.View
     @counter = 0
     @render()    
     
-  ################ RENDER METHODS   
+  # RENDER METHODS   
        
   render: =>
     $(@el).html  @template
@@ -120,7 +120,7 @@ class AgentsView extends Backbone.View
      itemview = new ItemViewAgent model: item
      $(@el).append itemview.render().el 
       
-  ################ UI ACTIONS  
+  # UI ACTIONS  
     
   addItem: ->
       @counter++
@@ -139,19 +139,17 @@ class AgentsView extends Backbone.View
    modifyAgents: ->    
      for agent in @collection.models
        agent.set content: "MODIFIED"
-       #alert(agent.get 'content')
        
    loadAgents: ->
      @collection.fetch()
      console.log "Agents fetched " + @collection.size();
      @render()
-     #@dumpAgents()
- 
+
    saveAgents: ->
      for agent in @collection.models
        agent.save()
        
-   ################ LOG
+   # LOG
        
    dumpAgents: ->
     console.log('---------------------- Agents ----------------------')
@@ -159,7 +157,7 @@ class AgentsView extends Backbone.View
     for agent in @collection.models
        console.log "#{agent.get '_id'} #{agent.get 'name'} #{agent.get 'content'}"
        
-   ################## MAIN VIEW EVENTS  
+   # MAIN VIEW EVENTS  
     
    events:
           'click #buttonaddagent':     'addItem'
@@ -169,6 +167,6 @@ class AgentsView extends Backbone.View
           'click #buttonloadagents':   'loadAgents'
           'click #buttonviewagents':   'dumpAgents'
           
-########################################### INIT VIEW ON LOAD ###########################################        
+# INIT VIEW ON LOAD        
   
 agentsviews = new AgentsView
